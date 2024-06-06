@@ -9,7 +9,7 @@ def gerar_numeros_conta(quantidade, inicio=10000, fim=99999):
 
 # Função de hash usando os últimos três dígitos do número da conta
 def funcao_hash(numero_conta):
-    return (numero_conta % 1000) % 9
+    return (numero_conta % 1000) % 9 
 
 # Função para gerar nomes aleatórios
 def gerar_nome():
@@ -38,22 +38,16 @@ class TabelaHashSondagemLinear:
         
     def inserir(self, numero_conta, nome_cliente):
         chave = funcao_hash(numero_conta)
-        inicio = chave
         while self.tabela[chave] is not None:
             chave = (chave + 1) % len(self.tabela)
-            if chave == inicio:
-                raise Exception("Tabela Hash está cheia")
         self.tabela[chave] = (numero_conta, nome_cliente)
         
     def buscar(self, numero_conta):
         chave = funcao_hash(numero_conta)
-        inicio = chave
         while self.tabela[chave] is not None:
             if self.tabela[chave][0] == numero_conta:
                 return True
             chave = (chave + 1) % len(self.tabela)
-            if chave == inicio:
-                break
         return False
 
 # Função para analisar a eficiência da tabela hash
